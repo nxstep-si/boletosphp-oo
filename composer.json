@@ -1,5 +1,5 @@
 {
-	"name" : "unixelias/boletosphp-oo",
+	"name" : "nxstep-si/boletosphp-oo",
 	"description" : "Pacote BoletosPHP aplicado na estrutura Orientada a Objeto",
 	"keywords" : [
 		"boleto",
@@ -24,7 +24,6 @@
 		}
 	},
 	"minimum-stability" : "dev",
-	"type" : "library",
 	"support" : {
 		"source" : "https://github.com/unixelias/boletosphp-oo",
 		"issues" : "https://github.com/unixelias/boletosphp-oo/issues"
