@@ -6,6 +6,7 @@ class Boletos
 {
     const BOLETOSPHP_ITAU = 'Itau';
     const BOLETOSPHP_SICREDI = 'Sicredi';
+    const BOLETOSPHP_BANCOOB = 'Bancoob';
 
     private $banco;
     private $bancoCls;
