@@ -7,56 +7,52 @@ class Bancoob
     public static $requires = [
         //'posto',
         //'byte_idt',
-        'carteira',
+        //'carteira',
     ];
 
     public static function render($boleto)
     {
         $dadosboleto = $boleto->getDadosBoleto();
         $codigobanco = "756";
-        $codigo_banco_com_dv = geraCodigoBanco($codigobanco);
+        $codigo_banco_com_dv = self::geraCodigoBanco($codigobanco);
         $nummoeda = "9";
-        $fator_vencimento = fator_vencimento($dadosboleto["data_vencimento"]);
+        $fator_vencimento = self::fator_vencimento($dadosboleto["data_vencimento"]);
         
-        //valor tem 10 digitos, sem virgula
-        $valor = formata_numero($dadosboleto["valor_boleto"],10,0,"valor");
-        //agencia é sempre 4 digitos
-        $agencia = formata_numero($dadosboleto["agencia"],4,0);
-        //conta é sempre 8 digitos
-        $conta = formata_numero($dadosboleto["conta"],8,0);
-        
+        $valor = self::formata_numero($dadosboleto["valor_boleto"],10,0,"valor");//valor tem 10 digitos, sem virgula
+        $agencia = self::formata_numero($dadosboleto["agencia"],4,0);//agencia é sempre 4 digitos
+        $conta = self::formata_numero($dadosboleto["conta"],8,0);//conta é sempre 8 digitos
         $carteira = $dadosboleto["carteira"];
         
-        //Zeros: usado quando convenio de 7 digitos
-        $livre_zeros='000000';
+        $livre_zeros='000000';//Zeros: usado quando convenio de 7 digitos
         $modalidadecobranca = $dadosboleto["modalidade_cobranca"];
-        $numeroparcela      = $dadosboleto["numero_parcela"];
-        
-        $convenio = formata_numero($dadosboleto["convenio"],7,0);
-        
-        //agencia e conta
-        $agencia_codigo = $agencia ." / ". $convenio;
+		$numeroparcela = $dadosboleto["numero_parcela"];
+        $convenio = self::formata_numero($dadosboleto["convenio"],7,0);
+        $agencia_codigo = $agencia ." / ". $convenio; //agencia e conta
         
         // Nosso número de até 8 dígitos - 2 digitos para o ano e outros 6 numeros sequencias por ano
         // deve ser gerado no programa boleto_bancoob.php
-        $nossonumero = formata_numero($dadosboleto["nosso_numero"],8,0);
+        $nossonumero = self::formata_numero($dadosboleto["nosso_numero"],8,0);
         $campolivre  = "$modalidadecobranca$convenio$nossonumero$numeroparcela";
-        
-        $dv=modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$carteira$agencia$campolivre");
+        $dv = self::modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$carteira$agencia$campolivre");
         $linha="$codigobanco$nummoeda$dv$fator_vencimento$valor$carteira$agencia$campolivre";
         
+        
+        
         $dadosboleto["codigo_barras"] = $linha;
-        $dadosboleto["linha_digitavel"] = monta_linha_digitavel($linha);
+        $dadosboleto["linha_digitavel"] = self::monta_linha_digitavel($linha);
         $dadosboleto["agencia_codigo"] = $agencia_codigo;
         $dadosboleto["nosso_numero"] = $nossonumero;
         $dadosboleto["codigo_banco_com_dv"] = $codigo_banco_com_dv;
         
         $boleto->nossoNumero = $nossonumero;
 
+        
         ob_start();
         require __DIR__.'/../includes/layout_bancoob.php';
         $r = ob_get_contents();
         ob_end_clean();
+        
+        
 
         return $r;
     }
@@ -90,82 +86,70 @@ class Bancoob
     }
     
     
-    public static function fbarcode($valor){
+    public static function fbarcode($valor, $imageBasePath)
+    {
+    	$fino = 1;
+    	$largo = 3;
+    	$altura = 50;
     
-    	$fino = 1 ;
-    	$largo = 3 ;
-    	$altura = 50 ;
-    
-    	$barcodes[0] = "00110" ;
-    	$barcodes[1] = "10001" ;
-    	$barcodes[2] = "01001" ;
-    	$barcodes[3] = "11000" ;
-    	$barcodes[4] = "00101" ;
-    	$barcodes[5] = "10100" ;
-    	$barcodes[6] = "01100" ;
-    	$barcodes[7] = "00011" ;
-    	$barcodes[8] = "10010" ;
-    	$barcodes[9] = "01010" ;
-    	for($f1=9;$f1>=0;$f1--){
-    		for($f2=9;$f2>=0;$f2--){
-    			$f = ($f1 * 10) + $f2 ;
-    			$texto = "" ;
-    			for($i=1;$i<6;$i++){
-    				$texto .=  substr($barcodes[$f1],($i-1),1) . substr($barcodes[$f2],($i-1),1);
+    	$barcodes[0] = '00110';
+    	$barcodes[1] = '10001';
+    	$barcodes[2] = '01001';
+    	$barcodes[3] = '11000';
+    	$barcodes[4] = '00101';
+    	$barcodes[5] = '10100';
+    	$barcodes[6] = '01100';
+    	$barcodes[7] = '00011';
+    	$barcodes[8] = '10010';
+    	$barcodes[9] = '01010';
+    	for ($f1 = 9; $f1 >= 0; $f1--) {
+    		for ($f2 = 9; $f2 >= 0; $f2--) {
+    			$f = ($f1 * 10) + $f2;
+    			$texto = '';
+    			for ($i = 1; $i < 6; $i++) {
+    				$texto .= substr($barcodes[$f1], ($i - 1), 1).substr($barcodes[$f2], ($i - 1), 1);
     			}
     			$barcodes[$f] = $texto;
     		}
     	}
     
-	    
-	    	//Desenho da barra
-	    
-	    
-	    	//Guarda inicial
-	    	?>
-	    	<img src=../../imagens/p.png width=<?php echo $fino?> height=<?php echo $altura?> border=0>
-	    	<img src=../../imagens/b.png width=<?php echo $fino?> height=<?php echo $altura?> border=0>
-	    	<img src=../../imagens/p.png width=<?php echo $fino?> height=<?php echo $altura?> border=0>
-	    	<img src=../../imagens/b.png width=<?php echo $fino?> height=<?php echo $altura?> border=0>
-	    	<img 
-		    <?php
-	    $texto = $valor ;
-	    if((strlen($texto) % 2) <> 0){
-	    	$texto = "0" . $texto;
-	    }
-	    
-	    // Draw dos dados
-	    while (strlen($texto) > 0) {
-	      $i = round(esquerda($texto,2));
-	      $texto = direita($texto,strlen($texto)-2);
-	      $f = $barcodes[$i];
-	      for($i=1;$i<11;$i+=2){
-	        if (substr($f,($i-1),1) == "0") {
-	          $f1 = $fino ;
-	        }else{
-	          $f1 = $largo ;
-	        }
-	    ?>
-	        src=../../imagens/p.png width=<?php echo $f1?> height=<?php echo $altura?> border=0><img 
-	    <?php
-	        if (substr($f,$i,1) == "0") {
-	          $f2 = $fino ;
-	        }else{
-	          $f2 = $largo ;
-	        }
-	    ?>
-	        src=../../imagens/b.png width=<?php echo $f2?> height=<?php echo $altura?> border=0><img 
-	    <?php
-	      }
-	    }
-	    
-	    // Draw guarda final
-	    ?>
-	    src=../../imagens/p.png width=<?php echo $largo?> height=<?php echo $altura?> border=0><img 
-	    src=../../imagens/b.png width=<?php echo $fino?> height=<?php echo $altura?> border=0><img 
-	    src=../../imagens/p.png width=<?php echo 1?> height=<?php echo $altura?> border=0> 
-	      <?php
-    } //Fim da função
+    	$texto = $valor;
+    	if ((strlen($texto) % 2) != 0) {
+    		$texto = '0'.$texto;
+    	}
+    
+    	$retorno = '';
+    
+    	$retorno .= "<img src='".$imageBasePath."p.png' width='$fino' height='$altura' border=0>";
+    	$retorno .= "<img src='".$imageBasePath."b.png' width='$fino' height='$altura' border=0>";
+    	$retorno .= "<img src='".$imageBasePath."p.png' width='$fino' height='$altura' border=0>";
+    	$retorno .= "<img src='".$imageBasePath."b.png' width='$fino' height='$altura' border=0>";
+    
+    	while (strlen($texto) > 0) {
+    		$i = round(self::esquerda($texto, 2));
+    		$texto = self::direita($texto, strlen($texto) - 2);
+    		$f = $barcodes[$i];
+    		for ($i = 1; $i < 11; $i += 2) {
+    			if (substr($f, ($i - 1), 1) == '0') {
+    				$f1 = $fino;
+    			} else {
+    				$f1 = $largo;
+    			}
+    			$retorno .= "<img src='".$imageBasePath."p.png' width='$f1' height='$altura' border='0'>";
+    			if (substr($f, $i, 1) == '0') {
+    				$f2 = $fino;
+    			} else {
+    				$f2 = $largo;
+    			}
+    			$retorno .= "<img src='".$imageBasePath."b.png' width='$f2' height='$altura' border='0'>";
+    		}
+    	}
+    	$retorno .= "<img src='".$imageBasePath."p.png' width='$largo' height='$altura' border='0'>";
+    	$retorno .= "<img src='".$imageBasePath."b.png' width='$fino' height='$altura' border='0'>";
+    	$retorno .= "<img src='".$imageBasePath."p.png' width='1' height='$altura' border='0'>";
+    
+    	return $retorno;
+    }
     
     public static function esquerda($entra,$comp){
     	return substr($entra,0,$comp);
@@ -180,10 +164,10 @@ class Bancoob
     	$ano = $data[2];
     	$mes = $data[1];
     	$dia = $data[0];
-        return(abs((_dateToDays("1997","10","07")) - (_dateToDays($ano, $mes, $dia))));
+        return(abs((self::dateToDays("1997","10","07")) - (self::dateToDays($ano, $mes, $dia))));
     }
     
-    public static function _dateToDays($year,$month,$day) {
+    public static function dateToDays($year,$month,$day) {
         $century = substr($year, 0, 2);
         $year = substr($year, 2, 2);
         if ($month > 2) {
@@ -332,7 +316,7 @@ class Bancoob
         // do campo livre e DV (modulo10) deste campo
         $p1 = substr($linha, 0, 4);
         $p2 = substr($linha, 19, 5);
-        $p3 = modulo_10("$p1$p2");
+        $p3 = self::modulo_10("$p1$p2");
         $p4 = "$p1$p2$p3";
         $p5 = substr($p4, 0, 5);
         $p6 = substr($p4, 5);
@@ -341,7 +325,7 @@ class Bancoob
         // 2. Campo - composto pelas posiçoes 6 a 15 do campo livre
         // e livre e DV (modulo10) deste campo
         $p1 = substr($linha, 24, 10);
-        $p2 = modulo_10($p1);
+        $p2 = self::modulo_10($p1);
         $p3 = "$p1$p2";
         $p4 = substr($p3, 0, 5);
         $p5 = substr($p3, 5);
@@ -350,7 +334,7 @@ class Bancoob
         // 3. Campo composto pelas posicoes 16 a 25 do campo livre
         // e livre e DV (modulo10) deste campo
         $p1 = substr($linha, 34, 10);
-        $p2 = modulo_10($p1);
+        $p2 = self::modulo_10($p1);
         $p3 = "$p1$p2";
         $p4 = substr($p3, 0, 5);
         $p5 = substr($p3, 5);
@@ -369,7 +353,17 @@ class Bancoob
     
     public static function geraCodigoBanco($numero) {
         $parte1 = substr($numero, 0, 3);
-        $parte2 = modulo_11($parte1);
+        $parte2 = self::modulo_11($parte1);
         return $parte1 . "-" . $parte2;
     }
+    
+    public static function formata_numdoc($num,$tamanho) {
+    	while(strlen($num)<$tamanho)
+    	{
+    		$num="0".$num;
+    	}
+    	return $num;
+    }
+    
+    
 }

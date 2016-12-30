@@ -12,9 +12,9 @@ class Bancoob extends AbstractBoleto
     public function getRequiredFields()
     {
         $fields = [
-            'posto',
-            'byte_idt',
-            'carteira',
+            'contrato',
+        	'numero_parcela',
+        	'total_parcelas',
         ];
 
         return array_merge(self::$requiredFields, $fields);
