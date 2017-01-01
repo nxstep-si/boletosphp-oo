@@ -35,7 +35,7 @@ class Bancoob
 		//var_dump($nossonumero);
 		$nossonumerosemdv = str_replace("-","",$nossonumero);
 		$campolivre  = "$carteira$agencia$modalidadecobranca$convenio$nossonumerosemdv$numeroparcela";
-		$dv = self::modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$carteira$modalidadecobranca$nossonumero$numeroparcela");
+		$dv = self::modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$carteira$modalidadecobranca$nossonumerosemdv$numeroparcela");
 		$linha="$codigobanco$nummoeda$dv$fator_vencimento$valor$campolivre";
 
 		$dadosboleto["codigo_barras"] = $linha;
@@ -348,7 +348,7 @@ class Bancoob
 		// 5. Campo composto pelo valor nominal pelo valor nominal do documento, sem
 		// indicacao de zeros a esquerda e sem edicao (sem ponto e virgula). Quando se
 		// tratar de valor zerado, a representacao deve ser 000 (tres zeros).
-		$campo5 = substr($linha, 5, 15);
+		$campo5 = substr($linha, 5, 14);
 
 		return "$campo1 $campo2 $campo3 $campo4 $campo5";
 	}
@@ -371,7 +371,7 @@ class Bancoob
 		$NNumero = self::formata_numdoc($index,7);
 		$qtde_nosso_numero = strlen($NNumero);
 		$sequencia = self::formata_numdoc($ag,4).self::formata_numdoc(str_replace("-","",$conv),10).$NNumero;
-		echo $sequencia;
+		//echo $sequencia;
 		$cont=0;
 		$calculoDv = 0;
 		for($num=0;$num<=strlen($sequencia);$num++){
