@@ -212,7 +212,6 @@ class Bancoob
 				$fator = 2;
 			}
 		}
-		 
 		$soma = 0;
 		for ($i = strlen($numtotal10); $i > 0; $i--) {
 			$numeros[$i] = substr($numtotal10,$i-1,1);
