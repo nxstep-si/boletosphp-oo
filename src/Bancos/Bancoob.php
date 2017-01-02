@@ -5,9 +5,11 @@ namespace GiordanoLima\BoletosPHP\Bancos;
 class Bancoob
 {
 	public static $requires = [
-			//'posto',
-			//'byte_idt',
-			//'carteira',
+			'contrato',
+			'convenio',
+			'modalidade_cobranca',
+			'numero_parcela',
+			'carteira',
 	];
 
 	public static function render($boleto)
@@ -46,15 +48,11 @@ class Bancoob
 		$dadosboleto["codigo_banco_com_dv"] = $codigo_banco_com_dv;
 
 		$boleto->nossoNumero = $nossonumero;
-		?><br /><?php echo $campolivre; ?><br /><?php
-
 
 		ob_start();
 		require __DIR__.'/../includes/layout_bancoob.php';
 		$r = ob_get_contents();
 		ob_end_clean();
-
-
 
 		return $r;
 	}
@@ -283,7 +281,6 @@ class Bancoob
 	public static function modulo_11($num, $base=9) {
 		$soma = 0;
 		$fator = 2;
-		echo $num."<br />";
 		for ($i = strlen($num); $i > 0; $i--) {
 			$numeros[$i] = substr($num,$i-1,1);
 			$parcial[$i] = $numeros[$i] * $fator;
@@ -307,7 +304,6 @@ class Bancoob
 	 Não mudei nada
 	 */
 	public static function monta_linha_digitavel($linha) {
-		echo $linha;
 		// Posição	Tam	Conteúdo
 		// 1 a 3    3	Número do banco
 		// 4        1	Código da Moeda - 9 para Real
@@ -349,7 +345,6 @@ class Bancoob
 		$p1 = substr($linha, 34, 10);
 		$p2 = self::modulo_10($p1);
 		$p3 = "$p1$p2";
-		var_dump($p3);
 		$p4 = substr($p3, 0, 5);
 		$p5 = substr($p3, 5);
 		$campo3 = "$p4.$p5";
@@ -383,7 +378,6 @@ class Bancoob
 		$NNumero = self::formata_numdoc($index,7);
 		$qtde_nosso_numero = 7;
 		$sequencia = self::formata_numdoc($ag,4).self::formata_numdoc(str_replace("-","",$conv),10).$NNumero;
-		//echo $sequencia;
 		$cont=0;
 		$calculoDv = 0;
 		for($num=0;$num<=strlen($sequencia);$num++){
