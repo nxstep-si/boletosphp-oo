@@ -29,13 +29,14 @@ class Bancoob
 		$convenio = self::formata_numero($dadosboleto["convenio"],7,0);
 		$agencia_codigo = $agencia ." / ". $convenio; //agencia e conta
 
-		// Nosso número de até 8 dígitos - 2 digitos para o ano e outros 6 numeros sequencias por ano
-		// deve ser gerado no programa boleto_bancoob.php
+		// Nosso número de até 8 dígitos - 2 digitos para o ano e outros 5 numeros sequencias por ano
+		// o ultimo é o DV
 		$nossonumero = self::formata_nossonumero($dadosboleto["nosso_numero"], $dadosboleto["agencia"], $dadosboleto["convenio"]);
-		//var_dump($nossonumero);
+		
 		$nossonumerosemdv = str_replace("-","",$nossonumero);
 		$campolivre  = "$carteira$agencia$modalidadecobranca$convenio$nossonumerosemdv$numeroparcela";
-		$dv = self::modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$carteira$modalidadecobranca$nossonumerosemdv$numeroparcela");
+
+		$dv = self::modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$carteira$agencia$modalidadecobranca$nossonumerosemdv$numeroparcela");
 		$linha="$codigobanco$nummoeda$dv$fator_vencimento$valor$campolivre";
 
 		$dadosboleto["codigo_barras"] = $linha;
@@ -45,6 +46,7 @@ class Bancoob
 		$dadosboleto["codigo_banco_com_dv"] = $codigo_banco_com_dv;
 
 		$boleto->nossoNumero = $nossonumero;
+		?><br /><?php echo $campolivre; ?><br /><?php
 
 
 		ob_start();
@@ -233,6 +235,8 @@ class Bancoob
 
 	 ESTA FUNÇÃO PEGA O DÍGITO VERIFICADOR:
 
+	 BANCO
+	 MOEDA
 	 NOSSONUMERO
 	 AGENCIA
 	 CONTA
@@ -257,7 +261,7 @@ class Bancoob
 			$digito = $soma % 11;
 
 			//corrigido
-			if ($digito == 10) {
+			if ($digito == "10") {
 				$digito = "X";
 			}
 
@@ -306,14 +310,23 @@ class Bancoob
 	 */
 	public static function monta_linha_digitavel($linha) {
 		echo $linha;
-		// Posição 	Conteúdo
-		// 1 a 3    Número do banco
-		// 4        Código da Moeda - 9 para Real
-		// 5        Digito verificador do Código de Barras
-		// 6 a 9    Fator de Vencimento
-		// 10 a 19  Valor (8 inteiros e 2 decimais)
-		// 20 a 44  Campo Livre definido por cada banco
+		// Posição	Tam	Conteúdo
+		// 1 a 3    3	Número do banco
+		// 4        1	Código da Moeda - 9 para Real
+		// 5        1	Digito verificador do Código de Barras
+		// 6 a 9    4	Fator de Vencimento
+		// 10 a 19  10	Valor (8 inteiros e 2 decimais)
+		// 20 a 44  24	Campo Livre definido por cada banco
 
+		// Campo Livre BANCOOB
+		// Posição	Tam	Conteúdo
+		// 20		1	Carteira
+		// 21 a 24  4	Código da agência
+		// 25 e 26	2	Modalidade
+		// 27 e 33	7	Convênio Cliente
+		// 34 e 41	8	Nosso Número c/dv, sem hífen
+		// 42 e 44	3	Numero da parcela
+		
 		// 1. Campo - composto pelo código do banco, código da moéda, as cinco primeiras posições
 		// do campo livre e DV (modulo10) deste campo
 		$p1 = substr($linha, 0, 4);
@@ -338,6 +351,7 @@ class Bancoob
 		$p1 = substr($linha, 34, 10);
 		$p2 = self::modulo_10($p1);
 		$p3 = "$p1$p2";
+		var_dump($p3);
 		$p4 = substr($p3, 0, 5);
 		$p5 = substr($p3, 5);
 		$campo3 = "$p4.$p5";
@@ -369,7 +383,7 @@ class Bancoob
 
 	public static function formata_nossonumero($index, $ag, $conv) {
 		$NNumero = self::formata_numdoc($index,7);
-		$qtde_nosso_numero = strlen($NNumero);
+		$qtde_nosso_numero = 7;
 		$sequencia = self::formata_numdoc($ag,4).self::formata_numdoc(str_replace("-","",$conv),10).$NNumero;
 		//echo $sequencia;
 		$cont=0;
