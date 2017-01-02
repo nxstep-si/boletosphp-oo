@@ -36,7 +36,7 @@ class Bancoob
 		$nossonumerosemdv = str_replace("-","",$nossonumero);
 		$campolivre  = "$carteira$agencia$modalidadecobranca$convenio$nossonumerosemdv$numeroparcela";
 
-		$dv = self::modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$carteira$agencia$modalidadecobranca$nossonumerosemdv$numeroparcela");
+		$dv = self::modulo_11("$codigobanco$nummoeda$fator_vencimento$valor$carteira$agencia$modalidadecobranca$convenio$nossonumerosemdv$numeroparcela");
 		$linha="$codigobanco$nummoeda$dv$fator_vencimento$valor$campolivre";
 
 		$dadosboleto["codigo_barras"] = $linha;
@@ -226,27 +226,64 @@ class Bancoob
 
 		return $digito;
 	}
+	
+	
+	
 
 	/*
 	 #################################################
-	 FUNÇÃO DO MÓDULO 11 RETIRADA DO PHPBOLETO
-
-	 MODIFIQUEI ALGUMAS COISAS...
-
-	 ESTA FUNÇÃO PEGA O DÍGITO VERIFICADOR:
-
+	 FUNÇÃO DO MÓDULO 11 
+	 MODIFICADO POR NEXTSTEP - COLABORADOR: ELIAS ALVES
+	 Com base na que estava no phpboleto, as instruções
+	 passadas pelo banco foram aplicadas
+	 
+	 ESTA FUNÇÃO PEGA O DÍGITO VERIFICADOR A PARTIR DA
+	 SEQUENCIA A SEGUIR:
 	 BANCO
 	 MOEDA
+	 FATOR DE VENCIMENTO
+	 VALOR
+	 CARTEIRA
+	 COOPERATIVA
+	 MODALIDADE
+	 CLIENTE
 	 NOSSONUMERO
-	 AGENCIA
-	 CONTA
-	 CAMPO 4 DA LINHA DIGITÁVEL
+	 PARCELA
+	 
+	 GERA O CAMPO 4 DA LINHA DIGITÁVEL
+	 
+	 Cálculo do digito verificador do Código de Barras (módulo 11):
+	 Para calcular o dígito verificador do código de 
+	 barras deve-se multiplicar cada dígito do código de 
+	 barras pelo seu respectivo índice de multiplicação 
+	 gerando um somatório. Deve-se calcular o dígito 
+	 através do módulo 11 do somatório.
+		a) o índice de multiplicação deve ser gerado 
+			com pesos de 2 a 9, da direita para a esquerda
+			sem incluir a posição do dígito verificador.
+			O primeiro dígito da direita para a esquerda
+			será multiplicado por 2, o segundo por 3 e 
+			assim sucessivamente;
+		b) multiplicar cada algarismo que compõe o 
+			número pelo seu respectivo peso (multiplicador);
+		c) os resultados das multiplicações deverão
+			ser somados;
+		d) o total da soma deverá ser dividido por 11;
+		     a. Exemplo: 35 / 11 = 3 e resto 2
+		e) o resto da divisão deverá ser subtraído de 11.
+		     a. Exemplo:  11 - 2 = 9
+		f) se o resultado da subtração for igual a 0 (zero),
+		1 (um) ou maior que 9 (nove) deverão assumir o 
+			dígito igual a 1 (um);
+		g) se não, o resultado da subtração será Dígito
+			Verificador.
 	 #################################################
 	 */
 
-	public static function modulo_11($num, $base=9, $r=0) {
+	public static function modulo_11($num, $base=9) {
 		$soma = 0;
 		$fator = 2;
+		echo $num."<br />";
 		for ($i = strlen($num); $i > 0; $i--) {
 			$numeros[$i] = substr($num,$i-1,1);
 			$parcial[$i] = $numeros[$i] * $fator;
@@ -256,54 +293,15 @@ class Bancoob
 			}
 			$fator++;
 		}
-		if ($r == 0) {
-			$soma *= 10;
-			$digito = $soma % 11;
-
-			//corrigido
-			if ($digito == "10") {
-				$digito = "X";
-			}
-
-			/*
-			 alterado por mim, Daniel Schultz
-
-			 Vamos explicar:
-
-			 O módulo 11 só gera os digitos verificadores do nossonumero,
-			 agencia, conta e digito verificador com codigo de barras (aquele que fica sozinho e triste na linha digitável)
-			 só que é foi um rolo...pq ele nao podia resultar em 0, e o pessoal do phpboleto se esqueceu disso...
-
-			 No BB, os dígitos verificadores podem ser X ou 0 (zero) para agencia, conta e nosso numero,
-			 mas nunca pode ser X ou 0 (zero) para a linha digitável, justamente por ser totalmente numérica.
-
-			 Quando passamos os dados para a função, fica assim:
-
-			 Agencia = sempre 4 digitos
-			 Conta = até 8 dígitos
-			 Nosso número = de 1 a 17 digitos
-
-			 A unica variável que passa 17 digitos é a da linha digitada, justamente por ter 43 caracteres
-
-			 Entao vamos definir ai embaixo o seguinte...
-
-			 se (strlen($num) == 43) { não deixar dar digito X ou 0 }
-			 */
-
-			if (strlen($num) == "43") {
-				//então estamos checando a linha digitável
-				if ($digito == "0" or $digito == "X" or $digito > 9) {
-					$digito = 1;
-				}
-			}
-			return $digito;
+		
+		$resto = $soma % 11;
+		$digito = 11 - $resto;
+		if ($digito == "0" or $digito == "X" or $digito > 9) {
+			$digito = 1;
 		}
-		elseif ($r == 1){
-			$resto = $soma % 11;
-			return $resto;
-		}
+		return $digito;
 	}
-
+	
 	/*
 	 Montagem da linha digitável - Função tirada do PHPBoleto
 	 Não mudei nada
