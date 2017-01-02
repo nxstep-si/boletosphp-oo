@@ -59,7 +59,7 @@
         <table width=666 cellspacing=5 padding=0 border=0><tr><td width=41></td></tr></table>
         <table width=666 cellspacing=5 padding=0 border=0 align=Default>
             <tr>
-                <td width=41><img src="<?php echo $boleto->getImageBasePath() ?>logo_empresa.png" /></td>
+                <td width=41><img src="<?php echo $boleto->getImageBasePath() ?>logonxstep.png" /></td>
                 <td class=ti width=455>
                     <span class="ld"> <?php echo $dadosboleto['identificacao']; ?></span>
                     <span class="cp"><?php echo isset($dadosboleto['cpf_cnpj']) ? '<br />'.$dadosboleto['cpf_cnpj'] : '' ?><br /></span>
@@ -226,15 +226,34 @@
                 </tr>
                 <tr>
                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                    <td class=cp vertical-align=top align=right width=113 height=12></td>
+                    <td class=cp vertical-align=top colspan=1 height=12>
+                    	<span class="campo">
+                            <?php echo $dadosboleto['valor_desconto_1'] ?>
+                        </span>
+                    </td>
                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                    <td class=cp vertical-align=top align=right width=112 height=12></td>
+                    <td class=cp vertical-align=top width=112 height=12>
+                    	<span class="campo">
+                            <?php echo $dadosboleto['valor_desconto_2'] ?>
+                        </span>                    
+                    </td>
                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                    <td class=cp vertical-align=top align=right width=113 height=12></td>
+                    <td class=cp vertical-align=top width=113 height=12>
+                    	<span class="campo">
+                            <?php echo $dadosboleto['valor_multa'] ?>
+                        </span>                    
+                    </td>
                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                    <td class=cp vertical-align=top align=right width=113 height=12></td>
+                    <td class=cp vertical-align=top width=113 height=12>
+                    	<span class="campo">
+                            <!-- TODO inserir lógica de calculo  -->
+                        </span>                    
+                    </td>
                     <td class="cp ctd" vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                    <td class="cp ctd" vertical-align=top align=right width=180 height=12></td>
+                    <td class="cp ctd" vertical-align=top align=right width=180 height=12>
+                    	<span class="campo">
+                        </span>                    
+                    </td>
                 </tr>
                 <tr>
                     <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath()?>2.png" width=7 border=0></td>
@@ -559,9 +578,9 @@
                             </tbody>
                         </table>
                     </td>
-                    <td vertical-align=top width=468 rowspan=5>
+                    <td vertical-align=top width=468 rowspan=5 colspan=7>
                         <font class=ct>Instruções(Texto de responsabilidade do cedente)</font>
-                        <br /><br />
+                        <br />
                         <span class=cp> 
                             <font class=campo>
                             <?php echo $dadosboleto['instrucoes1']; ?><br />
@@ -569,7 +588,7 @@
                             <?php echo $dadosboleto['instrucoes3']; ?><br />
                             <?php echo $dadosboleto['instrucoes4']; ?>
                             </font>
-                            <br /><br />
+                            <br />
                         </span>
                     </td>
                     <td align=right width=188>
@@ -581,7 +600,11 @@
                                 </tr>
                                 <tr>
                                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                                    <td class=cp vertical-align=top align=right width=180 height=12></td>
+                                    <td class=cp vertical-align=top align=right width=180 height=12>
+                                    	<span class="campo">
+                            				<?php echo $dadosboleto['valor_desconto_1'] ?>
+                        				</span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
@@ -616,7 +639,11 @@
                                 </tr>
                                 <tr>
                                     <td class=cp vertical-align=top width=7 height=12> <img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                                    <td class=cp vertical-align=top align=right width=180 height=12></td>
+                                    <td class=cp vertical-align=top align=right width=180 height=12>
+                                    	<span class="campo">
+                            				<?php echo $dadosboleto['valor_desconto_2'] ?>
+                        				</span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
@@ -651,7 +678,11 @@
                                 </tr>
                                 <tr>
                                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                                    <td class=cp vertical-align=top align=right width=180 height=12></td>
+                                    <td class=cp vertical-align=top align=right width=180 height=12>
+                                    	<span class="campo">
+                            				<?php echo $dadosboleto['valor_multa'] ?>
+                        				</span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td vertical-align=top width=7 height=1> <img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
@@ -770,6 +801,10 @@
                             <?php echo $dadosboleto['endereco2'] ?>
                         </span>
                     </td>
+                </tr>
+				<tr>
+                    <td class=ct vertical-align=top width=7 height=13><img height=13 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+                    <td class=ct  width=409 >Sacador/Avalista: <?php echo $dadosboleto['nome_avalista'] ?> </td>
                     <td class=ct vertical-align=top width=7 height=13><img height=13 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                     <td class=ct vertical-align=top width=180 height=13>Cód. baixa</td>
                 </tr>
@@ -785,13 +820,12 @@
             <tbody>
                 <tr>
                     <td class=ct  width=7 height=12></td>
-                    <td class=ct  width=409 >Sacador/Avalista</td>
                     <td class=ct  width=250 >
                         <div align=right>Autenticação mecânica - <b class=cp>Ficha de Compensação</b></div>
                     </td>
                 </tr>
                 <tr>
-                    <td class=ct  colspan=3 ></td>
+                    <td class=ct  colspan=4 ></td>
                 </tr>
             </tbody>
         </table>

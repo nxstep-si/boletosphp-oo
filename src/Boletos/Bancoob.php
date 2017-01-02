@@ -15,8 +15,12 @@ class Bancoob extends AbstractBoleto
 				'contrato',
 				'convenio',
 				'modalidade_cobranca',
+				'valor_desconto_1',
+				'valor_desconto_2',
+				'valor_multa',
 				'numero_parcela',
 				'total_parcelas',
+				'nome_avalista',
 		];
 
 		return array_merge(self::$requiredFields, $fields);

@@ -20,6 +20,8 @@ class Bancoob
 		$nummoeda = "9";
 		$fator_vencimento = self::fator_vencimento($dadosboleto["data_vencimento"]);
 		$fator_vencimento = self::formata_numero($fator_vencimento , 4, 0);
+		//$quantidade = self::formata_numero($dadosboleto["quantidade"],10,0,"valor");
+		//$valor_unitario = self::formata_numero($dadosboleto["valor_unitario"],10,0,"valor");
 		$valor = self::formata_numero($dadosboleto["valor_boleto"],10,0,"valor");//valor tem 10 digitos, sem virgula
 		$agencia = self::formata_numero($dadosboleto["agencia"],4,0);//agencia é sempre 4 digitos
 		$conta = self::formata_numero($dadosboleto["conta"],8,0);//conta é sempre 8 digitos
