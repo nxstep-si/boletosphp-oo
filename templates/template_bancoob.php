@@ -1,7 +1,10 @@
 <?php
 require_once "../vendor/autoload.php";
 use GiordanoLima\BoletosPHP\Boletos;
-
+/*
+ * Modelo apenas demonstrativo para o layout
+ * Para validar os dados insira informações reais
+ */
 $boleto = new Boletos(Boletos::BOLETOSPHP_BANCOOB);
 //var_dump($boleto);
 $boleto->setData([
@@ -10,10 +13,10 @@ $boleto->setData([
 		"valor_boleto" => "25,00",
 		"data_vencimento" => "02/01/2017",
 		"nosso_numero" => "1600023",//passar o índice do boleto
-		"agencia" => "1",
+		"agencia" => "3046",
 		"conta" => "12345", //Número da conta
-		"conta_dv" => "1",
-		"convenio" => "66744658", //Código do Cliente
+		"conta_dv" => "6",
+		"convenio" => "6744658", //Código do Cliente
 		"carteira" => "1",
 		"identificacao" => "Minha Própria Empresa LTDA",
 		"cpf_cnpj" => "72.035.942/0001-16",
@@ -63,15 +66,10 @@ $boleto->setData([
 $boleto->setImageBasePath("../imagens/");
 echo $boleto->render();
 
+/*
+ $dadosboleto = $boleto->getDadosBoleto();
 
-
-
-
-//var_dump($boleto);
-$dadosboleto = $boleto->getDadosBoleto();
-//echo $dadosboleto['sacado']."<br />";
-
-/* foreach ($dadosboleto as $i => $value) {
+ foreach ($dadosboleto as $i => $value) {
 	echo($dadosboleto[$i]."<br />");
 } */
 

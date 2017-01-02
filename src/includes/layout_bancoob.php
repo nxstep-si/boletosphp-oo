@@ -59,7 +59,7 @@
         <table width=666 cellspacing=5 padding=0 border=0><tr><td width=41></td></tr></table>
         <table width=666 cellspacing=5 padding=0 border=0 align=Default>
             <tr>
-                <td width=41><img src="<?php echo $boleto->getImageBasePath() ?>logonxstep.png" /></td>
+                <td width=41><img src="<?php echo $boleto->getImageBasePath() ?>logo_empresa.png" /></td>
                 <td class=ti width=455>
                     <span class="ld"> <?php echo $dadosboleto['identificacao']; ?></span>
                     <span class="cp"><?php echo isset($dadosboleto['cpf_cnpj']) ? '<br />'.$dadosboleto['cpf_cnpj'] : '' ?><br /></span>
