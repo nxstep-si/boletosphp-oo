@@ -15,6 +15,7 @@
             <!--.ctd 	{ background-color: #DBDBDB}
             <!-- table  { border-collapse: collapse; /* 'cellspacing' equivalent */}
             <!-- table td, table th {padding: 0; /* 'cellpadding' equivalent */}
+            <!--.campo	{ font: bold 10px Arial, Helvetica; color: black}
             -->
         </style>
     </head>
@@ -214,7 +215,7 @@
             <tbody>
                 <tr>
                     <td class=ct vertical-align=top width=7 height=13><img height=13 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
-                    <td class=ct vertical-align=top width=113 height=13>(-)Desconto / Abatimentos</td>
+                    <td class=ct vertical-align=top width=113 height=13>(-)Desconto</td>
                     <td class=ct vertical-align=top width=7 height=13><img height=13 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                     <td class=ct vertical-align=top width=112 height=13>(-)Outras deduções</td>
                     <td class=ct vertical-align=top width=7 height=13><img height=13 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
