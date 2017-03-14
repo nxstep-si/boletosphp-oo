@@ -7,7 +7,7 @@ use GiordanoLima\BoletosPHP\Boletos;
  */
 $boleto = new Boletos(Boletos::BOLETOSPHP_BANCOOB);
 //var_dump($boleto);
-$boleto->setData(array(
+$boleto->setData([
 		//Campos requeridos
 
 		"valor_boleto" => "25,00",
@@ -62,7 +62,7 @@ $boleto->setData(array(
 		"numero_parcela" => "03",
 		"total_parcelas" => "03"
 
-));
+]);
 $boleto->setImageBasePath("../imagens/");
 echo $boleto->render();
 echo $boleto->bancoCls;
