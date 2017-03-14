@@ -66,6 +66,7 @@ $boleto->setData(array(
 $boleto->setImageBasePath("../imagens/");
 echo $boleto->render('cnab400');
 
+
 /*
  $dadosboleto = $boleto->getDadosBoleto();
 

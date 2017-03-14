@@ -89,7 +89,17 @@ class Boletos
     public function render($tipo='cnab400')
     {
         if (is_array($this->dadosBoleto)) {
-            return call_user_func([$this->bancoCls, 'render'], $this,$tipo);
+          $BancoConst = split($this->bancoCls,'/');
+            switch ($BancoConst[4]) {
+              case 'Bancoob':
+                return call_user_func([$this->bancoCls, 'render'], $this,$tipo);
+                break;
+
+              default:
+                return call_user_func([$this->bancoCls, 'render'], $this);
+                break;
+            }
+
         } else {
             throw BoletosException::requiredSetData('É preencher os dados do boleto atraves do metodo setData.');
         }
