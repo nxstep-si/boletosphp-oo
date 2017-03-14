@@ -236,24 +236,24 @@
                     <td class=cp vertical-align=top width=112 height=12>
                     	<span class="campo">
                             <?php echo $dadosboleto['valor_desconto_2'] ?>
-                        </span>                    
+                        </span>
                     </td>
                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                     <td class=cp vertical-align=top width=113 height=12>
                     	<span class="campo">
                             <?php echo $dadosboleto['valor_multa'] ?>
-                        </span>                    
+                        </span>
                     </td>
                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                     <td class=cp vertical-align=top width=113 height=12>
                     	<span class="campo">
                             <!-- TODO inserir lógica de calculo  -->
-                        </span>                    
+                        </span>
                     </td>
                     <td class="cp ctd" vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                     <td class="cp ctd" vertical-align=top align=right width=180 height=12>
                     	<span class="campo">
-                        </span>                    
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -567,7 +567,7 @@
                     <td align=right width=10>
                         <table border-collapse=collapse border-spacing=0  padding=0 border=0 align=left>
                             <tbody>
-                                <tr> 
+                                <tr>
                                     <td class=ct vertical-align=top width=7 height=13><img height=13 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                                 </tr>
                                 <tr>
@@ -582,7 +582,7 @@
                     <td vertical-align=top width=468 rowspan=5 colspan=7>
                         <font class=ct>Instruções(Texto de responsabilidade do cedente)</font>
                         <br />
-                        <span class=cp> 
+                        <span class=cp>
                             <font class=campo>
                             <?php echo $dadosboleto['instrucoes1']; ?><br />
                             <?php echo $dadosboleto['instrucoes2']; ?><br />
