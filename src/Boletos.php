@@ -86,10 +86,10 @@ class Boletos
         $this->dadosBoleto = array_replace($this->defaults, $dadosBoleto);
     }
 
-    public function render()
+    public function render($tipo)
     {
         if (is_array($this->dadosBoleto)) {
-            return call_user_func([$this->bancoCls, 'render'], $this);
+            return call_user_func([$this->bancoCls, 'render'], $this,$tipo);
         } else {
             throw BoletosException::requiredSetData('É preencher os dados do boleto atraves do metodo setData.');
         }

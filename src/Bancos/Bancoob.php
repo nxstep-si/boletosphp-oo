@@ -12,7 +12,7 @@ class Bancoob
 			'carteira',
 	];
 
-	public static function render($boleto)
+	public static function render($boleto,$tipo)
 	{
 		$dadosboleto = $boleto->getDadosBoleto();
 		$codigobanco = "756";
@@ -36,7 +36,7 @@ class Bancoob
 		// Nosso número de até 8 dígitos - 2 digitos para o ano e outros 5 numeros sequencias por ano
 		// o ultimo é o DV
 		$nossonumero = self::formata_nossonumero($dadosboleto["nosso_numero"], $dadosboleto["agencia"], $dadosboleto["convenio"]);
-		
+
 		$nossonumerosemdv = str_replace("-","",$nossonumero);
 		$campolivre  = "$carteira$agencia$modalidadecobranca$convenio$nossonumerosemdv$numeroparcela";
 
@@ -52,7 +52,12 @@ class Bancoob
 		$boleto->nossoNumero = $nossonumero;
 
 		ob_start();
-		require __DIR__.'/../includes/layout_bancoob.php';
+		if($tipo = 'cnab240'){
+					require __DIR__.'/../includes/layout_bancoob240.php';
+		}
+		else if($tipo = 'cnab400') {
+					require __DIR__.'/../includes/layout_bancoob400.php';
+		}
 		$r = ob_get_contents();
 		ob_end_clean();
 
@@ -200,7 +205,7 @@ class Bancoob
 	public static function modulo_10($num) {
 		$numtotal10 = 0;
 		$fator = 2;
-		 
+
 		for ($i = strlen($num); $i > 0; $i--) {
 			$numeros[$i] = substr($num,$i-1,1);
 			$parcial10[$i] = $numeros[$i] * $fator;
@@ -225,17 +230,17 @@ class Bancoob
 
 		return $digito;
 	}
-	
-	
-	
+
+
+
 
 	/*
 	 #################################################
-	 FUNÇÃO DO MÓDULO 11 
+	 FUNÇÃO DO MÓDULO 11
 	 MODIFICADO POR NEXTSTEP - COLABORADOR: ELIAS ALVES
 	 Com base na que estava no phpboleto, as instruções
 	 passadas pelo banco foram aplicadas
-	 
+
 	 ESTA FUNÇÃO PEGA O DÍGITO VERIFICADOR A PARTIR DA
 	 SEQUENCIA A SEGUIR:
 	 BANCO
@@ -248,22 +253,22 @@ class Bancoob
 	 CLIENTE
 	 NOSSONUMERO
 	 PARCELA
-	 
+
 	 GERA O CAMPO 4 DA LINHA DIGITÁVEL
-	 
+
 	 Cálculo do digito verificador do Código de Barras (módulo 11):
-	 Para calcular o dígito verificador do código de 
-	 barras deve-se multiplicar cada dígito do código de 
-	 barras pelo seu respectivo índice de multiplicação 
-	 gerando um somatório. Deve-se calcular o dígito 
+	 Para calcular o dígito verificador do código de
+	 barras deve-se multiplicar cada dígito do código de
+	 barras pelo seu respectivo índice de multiplicação
+	 gerando um somatório. Deve-se calcular o dígito
 	 através do módulo 11 do somatório.
-		a) o índice de multiplicação deve ser gerado 
+		a) o índice de multiplicação deve ser gerado
 			com pesos de 2 a 9, da direita para a esquerda
 			sem incluir a posição do dígito verificador.
 			O primeiro dígito da direita para a esquerda
-			será multiplicado por 2, o segundo por 3 e 
+			será multiplicado por 2, o segundo por 3 e
 			assim sucessivamente;
-		b) multiplicar cada algarismo que compõe o 
+		b) multiplicar cada algarismo que compõe o
 			número pelo seu respectivo peso (multiplicador);
 		c) os resultados das multiplicações deverão
 			ser somados;
@@ -272,7 +277,7 @@ class Bancoob
 		e) o resto da divisão deverá ser subtraído de 11.
 		     a. Exemplo:  11 - 2 = 9
 		f) se o resultado da subtração for igual a 0 (zero),
-		1 (um) ou maior que 9 (nove) deverão assumir o 
+		1 (um) ou maior que 9 (nove) deverão assumir o
 			dígito igual a 1 (um);
 		g) se não, o resultado da subtração será Dígito
 			Verificador.
@@ -291,7 +296,7 @@ class Bancoob
 			}
 			$fator++;
 		}
-		
+
 		$resto = $soma % 11;
 		$digito = 11 - $resto;
 		if ($digito == "0" or $digito == "X" or $digito > 9) {
@@ -299,7 +304,7 @@ class Bancoob
 		}
 		return $digito;
 	}
-	
+
 	/*
 	 Montagem da linha digitável - Função tirada do PHPBoleto
 	 Não mudei nada
@@ -321,7 +326,7 @@ class Bancoob
 		// 27 e 33	7	Convênio Cliente
 		// 34 e 41	8	Nosso Número c/dv, sem hífen
 		// 42 e 44	3	Numero da parcela
-		
+
 		// 1. Campo - composto pelo código do banco, código da moéda, as cinco primeiras posições
 		// do campo livre e DV (modulo10) deste campo
 		$p1 = substr($linha, 0, 4);
@@ -408,7 +413,7 @@ class Bancoob
 		if ($Dv == 0) $Dv = 0;
 		if ($Dv == 1) $Dv = 0;
 		if ($Dv > 9) $Dv = 0;
-		 
+
 		return $NNumero."-".$Dv;
 	}
 
