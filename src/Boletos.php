@@ -86,7 +86,7 @@ class Boletos
         $this->dadosBoleto = array_replace($this->defaults, $dadosBoleto);
     }
 
-    public function render($tipo)
+    public function render($tipo='cnab400')
     {
         if (is_array($this->dadosBoleto)) {
             return call_user_func([$this->bancoCls, 'render'], $this,$tipo);

@@ -120,6 +120,8 @@ echo $boleto->render();
 */
 ```
 
+OBS: Para Bancoob a função render
+
 # Instruções para contribuição
 
 Aqui estão algumas instruções sobre o funcionamento do sistema e como contribuir
