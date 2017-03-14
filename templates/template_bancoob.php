@@ -64,7 +64,8 @@ $boleto->setData(array(
 
 ));
 $boleto->setImageBasePath("../imagens/");
-echo $boleto->render('cnab400');
+echo $boleto->render();
+echo $boleto->bancoCls;
 
 
 /*

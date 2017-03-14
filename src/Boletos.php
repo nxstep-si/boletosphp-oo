@@ -31,7 +31,7 @@ class Boletos
      *
      * @param constant $banco
      */
-    public function __construct($banco)
+    public function __construct($banco) 
     {
         $this->banco = strtoupper($banco);
         $this->bancoCls = __NAMESPACE__.'\\Bancos\\'.$banco;
@@ -89,15 +89,21 @@ class Boletos
     public function render($tipo='cnab400')
     {
         if (is_array($this->dadosBoleto)) {
-          $BancoConst = split($this->bancoCls,'/');
-            switch ($BancoConst[4]) {
-              case 'Bancoob':
-                return call_user_func([$this->bancoCls, 'render'], $this,$tipo);
-                break;
-
-              default:
-                return call_user_func([$this->bancoCls, 'render'], $this);
-                break;
+		
+            switch ($this->banco) {
+              	case 'BANCOOB':
+                	return call_user_func([$this->bancoCls, 'render'], $this,$tipo);
+                	break;
+				case 'ITAU':
+					return call_user_func([$this->bancoCls, 'render'], $this);
+                	break;
+				case 'SICREDI':
+					return call_user_func([$this->bancoCls, 'render'], $this);
+                	break;
+				
+				default: echo "Error";
+				
+				break;
             }
 
         } else {
