@@ -48,14 +48,14 @@ class Bancoob
 		$dadosboleto["agencia_codigo"] = $agencia_codigo;
 		$dadosboleto["nosso_numero"] = $nossonumero;
 		$dadosboleto["codigo_banco_com_dv"] = $codigo_banco_com_dv;
-
+		$dadosboleto["codigobanco"] = $codigobanco;
 		$boleto->nossoNumero = $nossonumero;
 
 		ob_start();
-		if($tipo = 'cnab240'){
+		if($tipo === 'cnab240'){
 					require __DIR__.'/../includes/layout_bancoob240.php';
 		}
-		else if($tipo = 'cnab400') {
+		else if($tipo === 'cnab400') {
 					require __DIR__.'/../includes/layout_bancoob400.php';
 		}
 		$r = ob_get_contents();

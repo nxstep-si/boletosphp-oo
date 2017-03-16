@@ -65,8 +65,8 @@ $boleto->setData([
 ]);
 $boleto->setImageBasePath("../imagens/");
 echo $boleto->render('cnab240');
-
-
+echo '<br /><br /><br /><br /><br /><br />';
+echo $boleto->render('cnab400')
 
 /*
  $dadosboleto = $boleto->getDadosBoleto();
