@@ -31,11 +31,7 @@
                 <td vertical-align=top class=cp>
                     <div ALIGN="left">
                         <p>
-                        <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo econômico).<br />
-                        <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do formulário.<br />
-                        <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de barras.<br />
-                        <li>Caso não apareça o código de barras no final, clique em F5 para atualizar esta tela.
-                        <li>Caso tenha problemas ao imprimir, copie a sequência numérica abaixo e pague no caixa eletrônico ou no internet banking:<br /><br />
+
                         <span class="ld2">
                             &nbsp;&nbsp;&nbsp;&nbsp;Linha Digitável: &nbsp;<?php echo $dadosboleto['linha_digitavel'] ?><br />
                             &nbsp;&nbsp;&nbsp;&nbsp;Valor: &nbsp;&nbsp;R$ <?php echo $dadosboleto['valor_boleto'] ?><br />
@@ -236,24 +232,24 @@
                     <td class=cp vertical-align=top width=112 height=12>
                     	<span class="campo">
                             <?php echo $dadosboleto['valor_desconto_2'] ?>
-                        </span>                    
+                        </span>
                     </td>
                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                     <td class=cp vertical-align=top width=113 height=12>
                     	<span class="campo">
                             <?php echo $dadosboleto['valor_multa'] ?>
-                        </span>                    
+                        </span>
                     </td>
                     <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                     <td class=cp vertical-align=top width=113 height=12>
                     	<span class="campo">
                             <!-- TODO inserir lógica de calculo  -->
-                        </span>                    
+                        </span>
                     </td>
                     <td class="cp ctd" vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                     <td class="cp ctd" vertical-align=top align=right width=180 height=12>
                     	<span class="campo">
-                        </span>                    
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -567,7 +563,7 @@
                     <td align=right width=10>
                         <table border-collapse=collapse border-spacing=0  padding=0 border=0 align=left>
                             <tbody>
-                                <tr> 
+                                <tr>
                                     <td class=ct vertical-align=top width=7 height=13><img height=13 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
                                 </tr>
                                 <tr>
@@ -582,7 +578,7 @@
                     <td vertical-align=top width=468 rowspan=5 colspan=7>
                         <font class=ct>Instruções(Texto de responsabilidade do cedente)</font>
                         <br />
-                        <span class=cp> 
+                        <span class=cp>
                             <font class=campo>
                             <?php echo $dadosboleto['instrucoes1']; ?><br />
                             <?php echo $dadosboleto['instrucoes2']; ?><br />

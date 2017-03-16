@@ -39,7 +39,7 @@ $boleto->setData([
 		"demonstrativo3" => "Demonstrativo 3 do canhoto",
 
 		//Instruções dentro do boleto
-		"instrucoes1" => "COBRAR MORA/DIAR$ 3,30 APOS O VENCIMENTO",
+		"instrucoes1" => "COBRAR MORA/DIAR R$3,30 APOS O VENCIMENTO",
 		"instrucoes2" => "INFORMAÇÕES DE CONTATO DO CLIENTE",
 		"instrucoes3" => "REIMPRESSÃO DO BOLETO                   ",
 		"instrucoes4" => "WWW.SICOO.COM.BR @ DEMAIS INFORMAÇÕES",

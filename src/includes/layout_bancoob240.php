@@ -31,11 +31,7 @@
                 <td vertical-align=top class=cp>
                     <div ALIGN="left">
                         <p>
-                        <li>Imprima em impressora jato de tinta (ink jet) ou laser em qualidade normal ou alta (Não use modo econômico).<br />
-                        <li>Utilize folha A4 (210 x 297 mm) ou Carta (216 x 279 mm) e margens mínimas à esquerda e à direita do formulário.<br />
-                        <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de barras.<br />
-                        <li>Caso não apareça o código de barras no final, clique em F5 para atualizar esta tela.
-                        <li>Caso tenha problemas ao imprimir, copie a sequência numérica abaixo e pague no caixa eletrônico ou no internet banking:<br /><br />
+
                         <span class="ld2">
                             &nbsp;&nbsp;&nbsp;&nbsp;Linha Digitável: &nbsp;<?php echo $dadosboleto['linha_digitavel'] ?><br />
                             &nbsp;&nbsp;&nbsp;&nbsp;Valor: &nbsp;&nbsp;R$ <?php echo $dadosboleto['valor_boleto'] ?><br />
