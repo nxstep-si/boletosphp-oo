@@ -53,7 +53,7 @@ class Bancoob
 
 		ob_start();
 		if($tipo === 'cnab240'){
-					require __DIR__.'/../includes/layout_bancoob240.php';
+					require __DIR__.'/../includes/layout_bancoob240p2.php';
 		}
 		else if($tipo === 'cnab400') {
 					require __DIR__.'/../includes/layout_bancoob400.php';

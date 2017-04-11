@@ -45,7 +45,7 @@ $boleto->setData([
 		"instrucoes4" => "WWW.SICOO.COM.BR @ DEMAIS INFORMAÇÕES",
 
 
-		"quantidade" => "25,00",
+		"quantidade" => "25",
 		"valor_unitario" => "1,0",
 		"aceite" => "N",
 		"especie" => "R$",
@@ -66,7 +66,8 @@ $boleto->setData([
 $boleto->setImageBasePath("../imagens/");
 echo $boleto->render('cnab240');
 echo '<br /><br /><br /><br /><br /><br />';
-echo $boleto->render('cnab400')
+echo $boleto->render('cnab400');
+
 
 /*
  $dadosboleto = $boleto->getDadosBoleto();
