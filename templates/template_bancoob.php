@@ -27,7 +27,7 @@ $boleto->setData([
 		"numero_documento" => "TI-009",//por enquanto o mesmo do contrato
 		"data_documento" => "01/04/2016",
 		"data_processamento" => "01/04/2016",
-		"endereco" => "Rua Endereço do Cedente, 1000 Diamantina",
+		"endereco" => "Rua Endereço do Cedente, 1000",
 
 		"sacado" => "Nome do Sacado",
 		"endereco1" => "Primeira linha endereço sacado",
@@ -51,6 +51,7 @@ $boleto->setData([
 		"especie" => "R$",
 		"especie_doc" => "DM",
 		"cidade_uf" => "Diamantina/MG",
+		"cep" => "39100-000",
 		"cedente"=> "RAZÃO SOCIAL LTDA, ETC – ME",
 
 		//Específicos do SICOOB

@@ -56,6 +56,7 @@ class Boletos
             'especie'            => 'R$',
             'especie_doc'        => '',
             'cidade_uf'          => '',
+            'cep'                => '',
             'cedente'            => '',
         ];
     }
