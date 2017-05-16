@@ -311,8 +311,12 @@
 <br />
 <br />
 <br />
+---segunda
+<img class=rotate90 width=300 src="<?php echo $boleto->getImageBasePath() ?>6.png">
+
+
 <br />
---SEGUNDA PARTE--
+--terceira PARTE--
 <br />
 <br />
 <br />
@@ -396,7 +400,7 @@
             <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
         </tr>
         <tr>
-            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
+            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=1 border=0></td>
             <td vertical-align=top width=422 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>b.png" width=422 border=0></td>
             <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
             <td vertical-align=top width=96 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=96 border=0></td>
@@ -551,7 +555,7 @@
             <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
         </tr>
         <tr>
-            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
+            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=1 border=0></td>
             <td vertical-align=top width=422 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>b.png" width=422 border=0></td>
             <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
             <td vertical-align=top width=96 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=96 border=0></td>
@@ -573,7 +577,7 @@
             <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
         </tr>
         <tr>
-            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
+            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=1 border=0></td>
             <td vertical-align=top width=422 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>b.png" width=422 border=0></td>
             <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
             <td vertical-align=top width=96 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=96 border=0></td>
@@ -594,7 +598,7 @@
             <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
         </tr>
         <tr>
-            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
+            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=1 border=0></td>
             <td vertical-align=top width=422 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>b.png" width=422 border=0></td>
             <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
             <td vertical-align=top width=96 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=96 border=0></td>
@@ -616,7 +620,7 @@
             <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
         </tr>
         <tr>
-            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
+            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=1 border=0></td>
             <td vertical-align=top width=422 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>b.png" width=422 border=0></td>
             <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
             <td vertical-align=top width=96 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=96 border=0></td>
@@ -647,6 +651,50 @@
     </tbody>
 </table>
 
+<table border-collapse=collapse border-spacing=0  width=532 padding=0 border=0>
+    <tbody>
+        <tr>
+            <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+            <td class=cp vertical-align=top width=532 height=12><span class="campo">Pagador: <?php echo $dadosboleto['sacado'] ?></span></td>
+            <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+        </tr>
+        <tr>
+            <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+            <td class=cp vertical-align=top width=532 height=12><span class="campo"><?php echo $dadosboleto['endereco1'] ?></span></td>
+            <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+        </tr>
+        <tr>
+            <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+            <td class=cp vertical-align=top width=532 height=12><span class="campo"><?php echo $dadosboleto['endereco2'] ?></span></td>
+            <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+        </tr>
+        <tr>
+            <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+            <td class=cp vertical-align=top width=532 height=12><span class="campo">Sacador/</span></td>
+            <td class=cp vertical-align=top width=7 height=12><img height=12 src="<?php echo $boleto->getImageBasePath() ?>1.png" width=1 border=0></td>
+        </tr>
+
+        <tr>
+            <td vertical-align=top width=7 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=7 border=0></td>
+            <td vertical-align=top width=532 height=1><img height=1 src="<?php echo $boleto->getImageBasePath() ?>2.png" width=525 border=0></td>
+            <td vertical-align=top width=7 height=1><img height=1 align=left src="<?php echo $boleto->getImageBasePath() ?>2.png" width=1 border=0></td>
+        </tr>
+
+    </tbody>
+</table>
+
+&nbsp
+<table border-collapse=collapse border-spacing=0  padding=0 width=532 border=0>
+    <tbody>
+        <tr>
+            <td vertical-align=bottom align=left height=50>
+                <?php echo self::fbarcode($dadosboleto['codigo_barras'], $boleto->getImageBasePath()); ?>
+            </td>
+            <td vertical-align=top class=ct aligh-left>Autenticação Ficha de Compensação </td>
+
+        </tr>
+    </tbody>
+</table>
 
 
     </body>
