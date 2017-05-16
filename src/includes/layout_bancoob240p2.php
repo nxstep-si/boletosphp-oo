@@ -40,6 +40,12 @@
         <table width=666 cellspacing=5 padding=0 border=0><tr><td width=41></td></tr></table>
         <br />
 
+<!--tabela pai-->
+
+<table border-collapse=collapse border-spacing=0  padding=0 width=666 border=0>
+  <tr>
+    <td> <!--inicio primeira parte-->
+
         <table border-collapse=collapse border-spacing=0  padding=0 width=134 border=0>
             <tr>
                 <td class=cp width=134>
@@ -307,20 +313,18 @@
     </tbody>
 </table>
 
+</td> <!--fim primeira parte -->
+<td><!--inicio segunda parte -->
 
-<br />
-<br />
-<br />
----segunda
-<img class=rotate90 width=300 src="<?php echo $boleto->getImageBasePath() ?>6.png">
+  <?php
+      for ($i=0; $i < 32; $i++) {
+        ?>  <img width=1 src="<?php echo $boleto->getImageBasePath() ?>3.png"> <?php
+      }
+  ?>
 
+</td><!--fim segunda parte -->
 
-<br />
---terceira PARTE--
-<br />
-<br />
-<br />
-<br />
+<td><!--inicio terceira parte -->
 
 <table border-collapse=collapse border-spacing=0  padding=0 width=532 border=0>
       <tbody>
@@ -696,6 +700,8 @@
     </tbody>
 </table>
 
-
+</td><!--fim terceira parte -->
+</tr><!--Fim row -->
+</table> <!-- Fim tabela pai -->
     </body>
 </html>
