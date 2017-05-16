@@ -40,11 +40,11 @@
         <table width=666 cellspacing=5 padding=0 border=0><tr><td width=41></td></tr></table>
         <br />
 
-<!--tabela pai-->
+<!-- tabela pai -->
 
 <table border-collapse=collapse border-spacing=0  padding=0 width=666 border=0>
   <tr>
-    <td> <!--inicio primeira parte-->
+    <td vertical-align=top width=134> <!--inicio primeira parte -->
 
         <table border-collapse=collapse border-spacing=0  padding=0 width=134 border=0>
             <tr>
@@ -314,17 +314,14 @@
 </table>
 
 </td> <!--fim primeira parte -->
-<td><!--inicio segunda parte -->
+<td width=7><!--inicio segunda parte -->
 
-  <?php
-      for ($i=0; $i < 32; $i++) {
-        ?>  <img width=1 src="<?php echo $boleto->getImageBasePath() ?>3.png"> <?php
-      }
-  ?>
+    <img src="<?php echo $boleto->getImageBasePath() ?>7.png">
 
+&nbsp
 </td><!--fim segunda parte -->
 
-<td><!--inicio terceira parte -->
+<td width=572><!--inicio terceira parte -->
 
 <table border-collapse=collapse border-spacing=0  padding=0 width=532 border=0>
       <tbody>
